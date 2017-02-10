@@ -4,7 +4,7 @@
   "description": "React & Redux voting app",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [],
@@ -25,5 +25,9 @@
   },
   "dependencies": {
     "immutable": "^3.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ruxandrafed/react-redux-voting-app.git"
   }
 }
