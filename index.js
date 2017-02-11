@@ -6,4 +6,5 @@ export const store = makeStore();
 (with e.g. babel-node), require the index.js file and interact
 with the application using the store. */
 
-startServer();
+startServer(store);
+/* we provide the store */
