@@ -9,6 +9,10 @@ export default function reducer(state = INITIAL_STATE, action) {
     case 'VOTE':
       return state.update('vote',
         voteState => vote(voteState, action.entry));
+    /* The main reducer function only hands parts of the state
+    to lower-level reducer functions. We separate the job of
+    finding the right location in the state tree from applying
+    the update to that location. */
   }
   return state;
 }
