@@ -8,3 +8,9 @@ with the application using the store. */
 
 startServer(store);
 /* we provide the store */
+
+store.dispatch({
+  type: 'SET_ENTRIES',
+  entries: require('./entries.json')
+});
+store.dispatch({type: 'NEXT'});
