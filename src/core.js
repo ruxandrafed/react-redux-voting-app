@@ -45,13 +45,28 @@ expresses is "reach into the nested data structure path
 If there are keys missing along the path, create new Maps in their
 place. If the value at the end is missing, initialize it with 0". /*
  */
-export function vote(voteState, entry) {
+export function vote(voteState, entry, voter) {
+  return addVote(
+    removePreviousVote(voteState, voter),
+    entry,
+    voter
+  );
+}
+
+function removePreviousVote(voteState, voter) {
+  const previousVote = voteState.getIn(['votes', voter]);
+  if (previousVote) {
+    return voteState.updateIn(['tally', previousVote], t => t - 1)
+      .removeIn(['votes', voter]);
+  } else {
+    return voteState;
+  }
+}
+
+function addVote(voteState, entry, voter) {
   if (voteState.get('pair').includes(entry)) {
-    return voteState.updateIn(
-      ['tally', entry],
-      0,
-      tally => tally + 1
-    );
+    return voteState.updateIn(['tally', entry], 0, t => t + 1)
+                    .setIn(['votes', voter], entry);
   } else {
     return voteState;
   }
