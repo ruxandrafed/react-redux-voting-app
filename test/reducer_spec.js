@@ -24,6 +24,7 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(fromJS({
       vote: {
+        round: 1,
         pair: ['Trainspotting', '28 Days Later']
       },
       entries: []
@@ -33,6 +34,7 @@ describe('reducer', () => {
   it('handles VOTE', () => {
     const initialState = fromJS({
       vote: {
+        round: 1,
         pair: ['Trainspotting', '28 Days Later']
       },
       entries: []
@@ -42,6 +44,7 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(fromJS({
       vote: {
+        round: 1,
         pair: ['Trainspotting', '28 Days Later'],
         tally: {Trainspotting: 1}
       },
@@ -52,6 +55,7 @@ describe('reducer', () => {
   it('returns the current state if it doesn\'t recognize the action', () => {
     const initialState = fromJS({
       vote: {
+        round: 1,
         pair: ['Trainspotting', '28 Days Later']
       },
       entries: []
@@ -60,6 +64,7 @@ describe('reducer', () => {
     const nextState = reducer(initialState, action);
     expect(nextState).to.equal(fromJS({
       vote: {
+        round: 1,
         pair: ['Trainspotting', '28 Days Later']
       },
       entries: []
@@ -87,24 +92,6 @@ describe('reducer', () => {
 
     expect(finalState).to.equal(fromJS({
       winner: 'Trainspotting'
-    }));
-  });
-
-  it('does not allow VOTE on an entry that is not in the current pair', () => {
-    const initialState = fromJS({
-      vote: {
-        pair: ['Trainspotting', '28 Days Later']
-      },
-      entries: []
-    });
-    const action = {type: 'VOTE', entry: 'Millions'};
-    const nextState = reducer(initialState, action);
-
-    expect(nextState).to.equal(fromJS({
-      vote: {
-        pair: ['Trainspotting', '28 Days Later']
-      },
-      entries: []
     }));
   });
 
