@@ -90,4 +90,22 @@ describe('reducer', () => {
     }));
   });
 
+  it('does not allow VOTE on an entry that is not in the current pair', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['Trainspotting', '28 Days Later']
+      },
+      entries: []
+    });
+    const action = {type: 'VOTE', entry: 'Millions'};
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['Trainspotting', '28 Days Later']
+      },
+      entries: []
+    }));
+  });
+
 });
